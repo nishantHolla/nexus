@@ -1,0 +1,37 @@
+---
+interface Props {
+  image: string
+}
+
+function extractName(filePath: string) {
+  const fileName = filePath.split('/')?.pop()?.split('.')[0];
+  if (!fileName) return;
+  const titleCase = fileName.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  return titleCase;
+}
+
+const {image} = Astro.props
+const name = extractName(image)
+
+---
+
+<div class="relative person-card bg-neutral-900 hover:bg-gradient-to-tr hover:from-cyan-400 hover:via-cyan-400/40 hover:to-transparent min-h-[450px] w-[350px] border-[4px] hover:border-cyan-400 hover:shadow-cyan-400 hover:shadow-card rounded-lg border-solid border-neutral-300 cursor-pointer">
+  <h4 class="person-name text-center text-3xl m-4">
+    {name}
+  </h4>
+  <div class="w-[50px] h-full">
+    <img src={image} alt={`${name}`} class="absolute bottom-0 left-0 w-[70%]" />
+  </div>
+</div>
+
+<style>
+
+.person-name {
+  transition: font-size 200ms linear;
+}
+
+.person-card:hover .person-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+</style>

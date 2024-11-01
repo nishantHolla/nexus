@@ -1,8 +1,40 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro"
+import TeamSection from "../components/TeamSection.astro"
+import { kebabToTitleCase } from "../lib/utils"
+
+const folders = [
+  'club-heads',
+  'design-heads',
+  'social-media-heads',
+  'campaigning-and-pr',
+  'event-management',
+  "marketing",
+  "logistics",
+  "operations",
+  "web-dev",
+  "app-dev",
+  "ai-ml"
+]
+
+const images:any = {}
+const glob = import.meta.glob("/src/assets/images/team/**/*.png")
+
+for (const k of Object.keys(glob)) {
+  const parts = k.split('/');
+  const folder = parts[parts.length - 2];
+  if (images[folder]) {
+    images[folder][k] = glob[k]
+  }
+  else {
+    images[folder] = {[k]: glob[k]}
+  }
+}
 
 ---
 
 <MainLayout title="Team">
-  <h1>Team page</h1>
+  <div class="flex-grow flex flex-col gap-24 px-4 py-10">
+    {folders.map(f => <TeamSection heading={kebabToTitleCase(f)} values={images[f]} />)}
+  </div>
 </MainLayout>

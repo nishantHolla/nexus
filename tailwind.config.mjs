@@ -4,6 +4,9 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      boxShadow: {
+        'card': '0 0 50px #22d3ee',
+      },
       animation: {
         text: "text 10s ease infinite alternate",
       },

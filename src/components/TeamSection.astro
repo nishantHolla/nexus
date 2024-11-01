@@ -1,0 +1,17 @@
+---
+import TeamCard from "./TeamCard.astro"
+
+interface Props {
+  heading: string
+  values: Record<string, unknown>
+}
+
+const {heading, values} = Astro.props
+---
+
+<section class="flex flex-col gap-16 items-center">
+  <h3 class="text-center text-5xl font-bold">{heading}</h3>
+  <div class="flex gap-8 flex-wrap justify-center">
+    {Object.keys(values).map(v => <TeamCard image={v}/>)}
+  </div>
+</section>
