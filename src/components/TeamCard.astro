@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
   image: string
 }
@@ -13,6 +15,8 @@ function extractName(filePath: string) {
 const {image} = Astro.props
 const name = extractName(image)
 
+console.log(image)
+
 ---
 
 <div class="relative person-card bg-neutral-900 hover:bg-gradient-to-tr hover:from-cyan-400 hover:via-cyan-400/40 hover:to-transparent min-h-[450px] w-[350px] border-[4px] hover:border-cyan-400 hover:shadow-cyan-400 hover:shadow-card rounded-lg border-solid border-neutral-300 cursor-pointer">
@@ -20,7 +24,7 @@ const name = extractName(image)
     {name}
   </h4>
   <div class="w-[50px] h-full">
-    <img src={image} alt={`${name}`} class="absolute bottom-0 left-0 w-[70%]" />
+    <Image width={300} height={200} src={image} alt={`${name}`} class="absolute bottom-0 left-0 w-[70%]" />
   </div>
 </div>
 
