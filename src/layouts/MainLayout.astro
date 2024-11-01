@@ -11,7 +11,7 @@ interface Props {
 const {title} = Astro.props
 ---
 
-<html lang="en" class="dark">
+<html lang="en" class="dark h-full w-full">
 	<head>
     <ViewTransitions />
 		<meta charset="utf-8" />
@@ -20,7 +20,7 @@ const {title} = Astro.props
 		<meta name="generator" content={Astro.generator} />
     <title>Nexus {title || ""} | Nishant Holla</title>
 	</head>
-	<body class="text-content bg-background">
+	<body class="text-content bg-background h-full w-full flex flex-col">
     <header class="h-[150px] md:h-[100px] flex items-center justify-center relative p-8">
       <NavBar />
     </header>
