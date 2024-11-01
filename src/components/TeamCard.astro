@@ -3,18 +3,20 @@ import { Image } from "astro:assets";
 
 interface Props {
   name: string,
+  pid: string,
   image: Record<string, any>
 }
 
-const {image, name} = Astro.props
+const {image, pid, name} = Astro.props
 ---
 
-<div class="relative person-card bg-neutral-900 hover:bg-gradient-to-tr hover:from-cyan-400 hover:via-cyan-400/40 hover:to-transparent min-h-[450px] w-[350px] border-[4px] hover:border-cyan-400 hover:shadow-cyan-400 hover:shadow-card rounded-lg border-solid border-neutral-300 cursor-pointer">
-  <h4 class="person-name text-center text-3xl m-4">
+<div transition:name={`team-card-${pid}`}
+  class="relative person-card bg-neutral-900 hover:bg-gradient-to-tr hover:from-cyan-400 hover:via-cyan-400/40 hover:to-transparent min-h-[450px] w-[350px] border-[4px] hover:border-cyan-400 hover:shadow-cyan-400 hover:shadow-card rounded-lg border-solid border-neutral-300 cursor-pointer" >
+  <h4 class="person-name text-center text-3xl m-4" transition:name={`team-card-heading-${pid}`}>
     {name}
   </h4>
   <div class="w-[50px] h-full">
-    <Image src={image.default} alt={`${name}`} class="absolute bottom-0 left-0 w-[70%]" />
+    <img src={image.default.src} alt={`${name}`} class="absolute bottom-0 left-0 w-[70%]" transition:name={`team-card-image-${pid}`} />
   </div>
 </div>
 

@@ -1,29 +1,37 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro"
-import { Image } from "astro:assets";
 import TeamSection from "../components/TeamSection.astro";
 import { kebabToTitleCase } from "../lib/utils";
 
-const domain_order = [
-  "club-heads",
-  "event-management",
-  "social-media",
-  "design",
-  "campaigning-and-pr",
-  "marketing",
-  "logistics",
-  "operations",
-  "web-dev",
-  "app-dev",
-  "ai-ml"
+const domain: {name: string, people: Record<string, any>[]}[] = [
+  { name: "club-heads", people: []},
+  { name: "event-management", people: []},
+  { name: "social-media", people: []},
+  { name: "design", people: []},
+  { name: "campaigning-and-pr", people: []},
+  { name: "marketing", people: []},
+  { name: "logistics", people: []},
+  { name: "operations", people: []},
+  { name: "web-dev", people: []},
+  { name: "app-dev", people: []},
+  { name: "ai-ml", people: []}
 ]
 
-const team_images = await Astro.glob("../assets/images/team/**/*.png");
+const team_images = await Astro.glob("/src/assets/images/team/**/*.png");
+
+for (const i of team_images) {
+  const parts = i.default.src.split('/')
+  const file_name = parts[parts.length - 1]
+  const name = file_name.split('.')[0]
+  const domain_name = name.split("_")[0]
+  console.log(domain_name)
+  domain.find(f => f.name === domain_name)?.people.push(i)
+}
 
 ---
 
 <MainLayout title="Team">
-  <div class="flex-grow flex flex-col gap-24 px-4 py-10">
-    {domain_order.map(domain => <TeamSection heading={kebabToTitleCase(domain)} people={team_images.filter(f => f.default.src.includes(`/team/${domain}`))} />)}
+  <div class="flex-grow flex flex-col gap-40 px-4 py-10">
+    {domain.map(d => <TeamSection heading={kebabToTitleCase(d.name)} people={d.people} />)}
   </div>
 </MainLayout>

@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import TeamCard from './TeamCard.astro';
 import { kebabToTitleCase } from '../lib/utils';
 
@@ -10,13 +9,13 @@ interface Props {
 
 const getName = (src: string) => {
   const path = src.split('?')[0].split('/');
-  const name = path[path.length - 1].split('.')[0];
+  const name = path[path.length - 1].split('.')[0].split('_')[1];
   return kebabToTitleCase(name);
 }
 
 const getPid = (src: string) => {
   const path = src.split('?')[0].split('/');
-  const pid = path[path.length - 1].split('.')[0];
+  const pid = path[path.length - 1].split('.')[0].split("_")[1];
   return pid;
 }
 
@@ -26,6 +25,11 @@ const {heading, people} = Astro.props
 <section class="flex flex-col gap-8 items-center">
   <h3 class="text-4xl">{heading}</h3>
   <div class="flex gap-8 flex-wrap justify-center">
-    {people.map(p => <a href={`/team/${getPid(p.default.src)}`}><TeamCard image={p} name={getName(p.default.src)}/></a>)}
+    {
+      people.map(p => {
+      const pid = getPid(p.default.src)
+      const name = getName(p.default.src)
+      return <a href={`/team/${pid}`}><TeamCard image={p} name={name} pid={pid}/></a>})
+    }
   </div>
 </section>
