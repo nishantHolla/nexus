@@ -18,7 +18,7 @@
 
 @font-face {
   font-family: 'Poppins';
-  src: url('/fonts/font-Regular.ttf');
+  src: url('/fonts/font-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -26,7 +26,7 @@
 
 @font-face {
   font-family: 'Poppins';
-  src: url('/fonts/font-Bold.ttf');
+  src: url('/fonts/font-Bold.woff2') format("woff2");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -34,7 +34,7 @@
 
 @font-face {
   font-family: 'Poppins';
-  src: url('/fonts/font-Light.ttf');
+  src: url('/fonts/font-Light.woff2') format("woff2");
   font-weight: lighter;
   font-style: normal;
   font-display: swap;

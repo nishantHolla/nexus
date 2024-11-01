@@ -1,0 +1,17 @@
+---
+import Sun from "../assets/icons/eva-sun.svg?raw"
+import Moon from "../assets/icons/eva-moon.svg?raw"
+
+const IconMap = {
+  sun: Sun,
+  moon: Moon
+}
+
+interface Props {
+  of: keyof typeof IconMap;
+}
+
+const {of} = Astro.props
+---
+
+<Fragment set:html={IconMap[of]}/>
