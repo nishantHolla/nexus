@@ -1,17 +1,31 @@
 ---
-import TeamCard from "./TeamCard.astro"
+import { Image } from 'astro:assets';
+import TeamCard from './TeamCard.astro';
+import { kebabToTitleCase } from '../lib/utils';
 
 interface Props {
-  heading: string
-  values: Record<string, unknown>
+  heading: string;
+  people: Record<string, any>[]
 }
 
-const {heading, values} = Astro.props
+const getName = (src: string) => {
+  const path = src.split('?')[0].split('/');
+  const name = path[path.length - 1].split('.')[0];
+  return kebabToTitleCase(name);
+}
+
+const getPid = (src: string) => {
+  const path = src.split('?')[0].split('/');
+  const pid = path[path.length - 1].split('.')[0];
+  return pid;
+}
+
+const {heading, people} = Astro.props
 ---
 
-<section class="flex flex-col gap-16 items-center">
-  <h3 class="text-center text-5xl font-bold">{heading}</h3>
+<section class="flex flex-col gap-8 items-center">
+  <h3 class="text-4xl">{heading}</h3>
   <div class="flex gap-8 flex-wrap justify-center">
-    {Object.keys(values).map(v => <TeamCard image={v}/>)}
+    {people.map(p => <a href={`/team/${getPid(p.default.src)}`}><TeamCard image={p} name={getName(p.default.src)}/></a>)}
   </div>
 </section>

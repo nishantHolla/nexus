@@ -1,14 +1,15 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro"
-import TeamSection from "../components/TeamSection.astro"
-import { kebabToTitleCase } from "../lib/utils"
+import { Image } from "astro:assets";
+import TeamSection from "../components/TeamSection.astro";
+import { kebabToTitleCase } from "../lib/utils";
 
-const folders = [
-  'club-heads',
-  'design-heads',
-  'social-media-heads',
-  'campaigning-and-pr',
-  'event-management',
+const domain_order = [
+  "club-heads",
+  "event-management",
+  "social-media",
+  "design",
+  "campaigning-and-pr",
   "marketing",
   "logistics",
   "operations",
@@ -17,24 +18,12 @@ const folders = [
   "ai-ml"
 ]
 
-const images:any = {}
-const glob = import.meta.glob("/src/assets/images/team/**/*.png")
-
-for (const k of Object.keys(glob)) {
-  const parts = k.split('/');
-  const folder = parts[parts.length - 2];
-  if (images[folder]) {
-    images[folder][k] = glob[k]
-  }
-  else {
-    images[folder] = {[k]: glob[k]}
-  }
-}
+const team_images = await Astro.glob("../assets/images/team/**/*.png");
 
 ---
 
 <MainLayout title="Team">
   <div class="flex-grow flex flex-col gap-24 px-4 py-10">
-    {folders.map(f => <TeamSection heading={kebabToTitleCase(f)} values={images[f]} />)}
+    {domain_order.map(domain => <TeamSection heading={kebabToTitleCase(domain)} people={team_images.filter(f => f.default.src.includes(`/team/${domain}`))} />)}
   </div>
 </MainLayout>

@@ -1,22 +1,12 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 interface Props {
-  image: string
+  name: string,
+  image: Record<string, any>
 }
 
-function extractName(filePath: string) {
-  const fileName = filePath.split('/')?.pop()?.split('.')[0];
-  if (!fileName) return;
-  const titleCase = fileName.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-  return titleCase;
-}
-
-const {image} = Astro.props
-const name = extractName(image)
-
-console.log(image)
-
+const {image, name} = Astro.props
 ---
 
 <div class="relative person-card bg-neutral-900 hover:bg-gradient-to-tr hover:from-cyan-400 hover:via-cyan-400/40 hover:to-transparent min-h-[450px] w-[350px] border-[4px] hover:border-cyan-400 hover:shadow-cyan-400 hover:shadow-card rounded-lg border-solid border-neutral-300 cursor-pointer">
@@ -24,7 +14,7 @@ console.log(image)
     {name}
   </h4>
   <div class="w-[50px] h-full">
-    <Image width={300} height={200} src={image} alt={`${name}`} class="absolute bottom-0 left-0 w-[70%]" />
+    <Image src={image.default} alt={`${name}`} class="absolute bottom-0 left-0 w-[70%]" />
   </div>
 </div>
 
@@ -39,3 +29,5 @@ console.log(image)
   font-weight: bold;
 }
 </style>
+
+
