@@ -1,8 +1,4 @@
 ---
-import { cn } from "../lib/utils"
-
-const pathname = Astro.url.pathname
-
 const navItems = [
   { name: "HOME", href: '/' },
   { name: "EVENT", href: "/event" },
@@ -12,5 +8,13 @@ const navItems = [
 ---
 
 <nav class="text-3xl grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
-  {navItems.map( item => <a class={cn("font-bold", pathname === item.href && "--fancy-text")} href={item.href}>{item.name}</a> )}
+  {navItems.map( item => <a class="font-bold" href={item.href}>{item.name}</a> )}
 </nav>
+
+<script>
+document.addEventListener('astro:page-load', () => {
+  const item = document.querySelector(`nav a[href="${window.location.pathname}"]`)
+  if (item)
+    item.classList.add('--fancy-text')
+})
+</script>
