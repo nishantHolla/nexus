@@ -1,0 +1,16 @@
+---
+import { cn } from "../lib/utils"
+
+const pathname = Astro.url.pathname
+
+const navItems = [
+  { name: "HOME", href: '/' },
+  { name: "EVENT", href: "/event" },
+  { name: "TEAM", href: "/team" },
+  { name: "MEEEE", href: "/me" }
+]
+---
+
+<nav class="text-3xl grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
+  {navItems.map( item => <a class={cn("font-bold", pathname === item.href && "--fancy-text")} href={item.href}>{item.name}</a> )}
+</nav>
