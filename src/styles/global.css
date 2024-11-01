@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  :root {
+    --color-background: #d1d5db;
+    --color-content: #030712;
+  }
+
+  :root.dark {
+    --color-background: #030712;
+    --color-content: #d1d5db;
+  }
+
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/font-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/font-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/font-Light.ttf');
+  font-weight: lighter;
+  font-style: normal;
+  font-display: swap;
+}
