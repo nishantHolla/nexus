@@ -4,5 +4,48 @@ import MainLayout from "../layouts/MainLayout.astro"
 ---
 
 <MainLayout title="Home">
-  <h1>Home page</h1>
+  <div class="flex-grow flex items-center justify-center p-10">
+    <div class="w-full h-[400px] max-w-[400px]">
+      <svg width="100%" height="100%" viewBox="0 0 681 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow" x="-50%" y="-50%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="50" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <path filter="url(#glow)" class="n-circle" d="M5 330V185L125 322L129.5 175.5C129.5 120.5 222 5 370 5C518 5 607 144.066 607 259.5C607 301.5 578.5 478 370 494C234.773 504.377 146 364 146 364" stroke="#03BED1" stroke-width="10"/>
+        <path filter="url(#glow)" class="exus" d="M192 246L193.5 324.5H261M192 246V181H261M192 246C192 246 252.167 246 254.5 246M296 181L386.5 324.5M386.5 181L291 324.5M434.5 181V288.5C434.5 288.5 443.5 333.69 498.5 328C544.5 323.241 546.5 288.5 546.5 288.5C546.5 288.5 550.667 212.333 549 181M674 186C647.833 176.167 608.5 178.5 605 200.5C598.321 242.48 695.187 262 672 309C653.5 346.5 593.021 319 593.021 319" stroke="#03BED1" stroke-width="10"/>
+      </svg>
+    </div>
+  </div>
 </MainLayout>
+
+<style>
+
+.n-circle {
+  stroke-dashoffset: 10000;
+  stroke-dasharray: 10000;
+  animation: n-circle-draw 13s linear forwards;
+}
+
+.exus {
+  stroke-dashoffset: 1000;
+  stroke-dasharray: 1000;
+  animation: exus-draw 5s linear forwards;
+}
+
+@keyframes n-circle-draw {
+to {
+  stroke-dashoffset: 0;
+} 
+}
+
+@keyframes exus-draw {
+to {
+  stroke-dashoffset: 0;
+} 
+}
+</style>
