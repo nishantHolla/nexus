@@ -22,9 +22,9 @@ const getPid = (src: string) => {
 const {heading, people} = Astro.props
 ---
 
-<section class="flex flex-col gap-8 items-center">
-  <h3 class="text-4xl">{heading}</h3>
-  <div class="flex gap-8 flex-wrap justify-center">
+<section class="flex flex-col gap-8 items-center md:items-start">
+  <h3 class="text-4xl font-bold md:py-8">{heading}</h3>
+  <div class="flex gap-8 flex-wrap justify-center self-center">
     {
       people.map(p => {
       const pid = getPid(p.default.src)

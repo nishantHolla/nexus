@@ -1,7 +1,7 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro"
-import TeamSection from "../components/TeamSection.astro";
-import { kebabToTitleCase } from "../lib/utils";
+import MainLayout from "../../layouts/MainLayout.astro"
+import TeamSection from "../../components/TeamSection.astro";
+import { kebabToTitleCase } from "../../lib/utils";
 
 const domain: {name: string, people: Record<string, any>[]}[] = [
   { name: "club-heads", people: []},
@@ -24,7 +24,6 @@ for (const i of team_images) {
   const file_name = parts[parts.length - 1]
   const name = file_name.split('.')[0]
   const domain_name = name.split("_")[0]
-  console.log(domain_name)
   domain.find(f => f.name === domain_name)?.people.push(i)
 }
 

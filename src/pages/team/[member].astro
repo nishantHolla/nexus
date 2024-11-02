@@ -1,0 +1,41 @@
+---
+import { Image } from "astro:assets";
+import type { GetStaticPaths } from "astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+import { kebabToTitleCase } from "../../lib/utils";
+
+const team_images: Record<string, any>[] = await Astro.glob("/src/assets/images/team/**/*.png");
+
+export const getStaticPaths = (async () => {
+  const persons = []
+  const team_images: Record<string, any>[] = await Astro.glob("/src/assets/images/team/**/*.png");
+
+  for (const i of team_images) {
+    const parts = i.default.src.split('/')
+    const file_name = parts[parts.length - 1]
+    const name = file_name.split('.')[0]
+    const person_name = name.split("_")[1]
+    persons.push({params: {member: person_name}})
+  }
+
+  return persons
+}) satisfies GetStaticPaths;
+
+const {member} = Astro.params
+const name = kebabToTitleCase(member)
+const image = team_images.find(f => f.default.src.includes(member))
+
+---
+
+<MainLayout title={name}>
+  <div class="flex-grow p-8">
+    <div transition:name={`team-card-${member}`}
+      class="relative person-card bg-gradient-to-tr from-cyan-400 via-cyan-400/40 to-transparent w-full h-full border-[4px] border-cyan-400 shadow-cyan-400 shadow-card rounded-lg border-solid">
+      <img src={image?.default.src} alt={`${name}`} class="absolute bottom-0 min-w-[350px] left-1/2 translate-x-[-50%] sm:left-0 sm:w-[25%] sm:translate-x-0" transition:name={`team-card-image-${member}`} />
+      <div class="absolute sm:w-[75%] w-full h-full right-0 top-0 flex flex-col py-16 sm:px-4 items-center">
+        <h3 class="person-name text-2xl text-center sm:text-5xl md:text-6xl lg:text-7xl font-bold" transition:name={`team-card-heading-${member}`}>{name}</h3>
+        <div class="flex-grow text-center flex py-4 sm:py-0 sm:items-center justify-center text-xl md:text-3xl">Something cool about {name}</div>
+      </div>
+    </div>
+  </div>
+</MainLayout>
